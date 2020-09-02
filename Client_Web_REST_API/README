@@ -1,0 +1,42 @@
+Mosessohn Vlad - 322CA - Tema 3 - PC
+
+Am implementat cu succes comenzile register, login, logout si exit. Precizez ca
+am preluat fisierele helpers din laborator, dar si fisierul requests.c care
+contine functiile compute_post_request si compute_get_request scrise la
+laorator.
+
+Pentru register:
+
+Am citit username-ul si parola in my_username si my_password. Pentru a avea o
+aplicatie json am folosit headerul parson.h. Construiesc variabila info pentru
+a o transmite ca parametru functiei compute_post_request. Apoi caut cuvantul
+error in raspunsul primit. Daca nu apare acest cuvant inseamna ca inregistrarea
+a avut loc cu succes. Daca in raspuns apare cuvantul error inseamna ca 
+username-ul a fost inregistrat deja si ca trebuie sa alegem alt username.
+
+Pentru login:
+
+Am facut similiar cu register-ul pana in punctul cu primirea raspunsului de la
+server, doar ca aici terbuie sa facem request la pagina cu login-ul. Retinem
+cookie-ul de login in variabila cookie astfel : cautam cuvantul connect in
+raspuns. In acest mod preluam tot stringul de la inceputul cookie-ului pana la
+finalul raspunsului in variabila cooki. Apoi aplicam strtok si aducem cookie-ul
+in cookies. Apoi verificam daca login-ul este valid prin cautarea in raspuns a
+fragmentului "HTTP/1.1 200 OK". Totodata, ma folosesc de variabila auxiliara
+flag pentru a retine in permanenta daca clientul este sau nu conectat deoarece
+nu are voie sa se mai conecteze inca o data daca este deja logat.
+
+Pentru logout:
+
+Folosesc functia compute_get_request cu cookies ca parametru pentru a construi
+cererea de logout. Verific daca cererea contine fragmentul "HTTP/1.1 200 OK"
+pentru a fi valida. Daca nu este valida inseamna ca respectivul client nu era
+logat cand a dat logout si nu este bine.
+
+Pentru exit:
+
+Afisez un mesaj corespunzator si dupa inchid conexiunea cu serverul. Apoi dau
+return 0 pentru iesirea din while fortata.
+
+TEMA SE RULEAZA CU make run.
+
